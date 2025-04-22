@@ -27,12 +27,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Install Pandoc
         run: |
           wget -O ${{ runner.temp }}/pandoc.deb https://github.com/jgm/pandoc/releases/download/3.6.4/pandoc-3.6.4-1-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/pandoc.deb \
-          && cabal update \
-          && cabal install
+          && sudo dpkg -i ${{ runner.temp }}/pandoc.deb
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -40,7 +38,11 @@ jobs:
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build
         run: |
-          cabal exec make html
+          cabal update \
+          && cabal install \
+          && cabal exec make html \
+          && mkdir ./public \
+          && mv ./tutorial.html ./public/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
