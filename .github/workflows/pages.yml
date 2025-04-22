@@ -29,7 +29,8 @@ jobs:
         run: |
           wget -O ${{ runner.temp }}/pandoc.deb https://github.com/jgm/pandoc/releases/download/3.6.4/pandoc-3.6.4-1-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/pandoc.deb \
-          && cabal install --lib pandoc
+          && cabal install \
+          && cabal exec make
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
