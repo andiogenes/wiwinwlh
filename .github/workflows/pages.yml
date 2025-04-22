@@ -36,8 +36,7 @@ jobs:
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build
         run: |
-          ls . && \
-          make html
+          echo $(ls .)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
