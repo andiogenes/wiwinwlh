@@ -40,7 +40,7 @@ includes: includes.hs
 	$(GHC) --make $<
 
 # .html Target
-%.html: %.md includes
+%.html: %.md
 	./includes < $<  \
 	| $(PANDOC) --template $(HTEMPLATE) -s -f $(IFORMAT) -t html $(FLAGS) $(HFLAGS) \
 	| sed '/<extensions>/r extensions.html' \
