@@ -42,7 +42,8 @@ jobs:
           && cabal install \
           && cabal exec make html \
           && mkdir ./public \
-          && mv ./tutorial.html ./public/index.html
+          && mv ./tutorial.html ./public/index.html \
+          && cp -r ./img ./js ./css ./public/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
