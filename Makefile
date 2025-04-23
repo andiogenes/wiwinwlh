@@ -41,7 +41,7 @@ includes: includes.hs
 
 # .html Target
 %.html: %.md
-	./includes < $<  \
+	includes < $<  \
 	| $(PANDOC) --template $(HTEMPLATE) -s -f $(IFORMAT) -t html $(FLAGS) $(HFLAGS) \
 	| sed '/<extensions>/r extensions.html' \
 	| sed '/<copyright>/r resources/copyright.html' > $@
